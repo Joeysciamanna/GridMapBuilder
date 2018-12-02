@@ -6,7 +6,7 @@ import ch.g_7.gridEngine.field.building.FieldFactory;
 
 public class WrappedFieldFactory implements FieldFactory{
 
-	FieldFactory extendingFactory;
+	private FieldFactory extendingFactory;
 	
 	public WrappedFieldFactory(FieldFactory extendingFactory) {
 		this.extendingFactory = extendingFactory;
