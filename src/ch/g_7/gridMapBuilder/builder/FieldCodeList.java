@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import ch.g_7.gridEngine.field.building.FieldCode;
-import ch.g_7.gridEngine.field.building.FieldFactoryProducer;
+import ch.g_7.gridEngine.field.building.FieldCreationRegister;
 import ch.g_7.gridMapBuilder.field.WrappedField;
 
 public class FieldCodeList{
@@ -46,7 +46,7 @@ public class FieldCodeList{
 	}
 	
 	public WrappedField getActualWrappedField() {
-		return new WrappedField(FieldFactoryProducer.getDefaultFactory().getField(getActualFieldCode()));
+		return new WrappedField(FieldCreationRegister.getDefaultFactory().getField(getActualFieldCode()));
 	}
 
 }
