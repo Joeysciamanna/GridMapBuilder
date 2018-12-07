@@ -6,10 +6,13 @@ import java.awt.Point;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import ch.g_7.gridEngine.core.FieldGrid;
+import ch.g_7.gridEngine.core.FieldStack;
+import ch.g_7.gridEngine.field.ColoredField;
 import ch.g_7.gridEngine.field.building.DefaultFieldFactory;
 import ch.g_7.gridEngine.field.building.FieldCode;
 import ch.g_7.gridEngine.field.building.FieldCreationRegister;
 import ch.g_7.gridEngine.field.building.FieldFactory;
+import ch.g_7.gridEngine.helper.Lambda;
 import ch.g_7.gridMapBuilder.builder.FieldCodeList;
 import ch.g_7.gridMapBuilder.builder.Placer;
 import ch.g_7.gridMapBuilder.builder.PlacersKeyListner;
@@ -32,10 +35,21 @@ public class GridMapBuilder {
 
 		int fieldHeight = 16;
 		int fieldWidth = 16;
-		int height = 8;
-		int width = 8;
+		int height = 24;
+		int width = 32;
 		FieldGrid grid = new FieldGrid(new Dimension(fieldWidth,fieldHeight), new Dimension(width, height));
 		
+		grid.forEach(new Lambda<Void, FieldStack>() {
+			@Override
+			public Void apply(FieldStack stack) {
+				stack.addField(new ColoredField(Color.GREEN) {
+				@Override
+				public FieldCode getCode() {
+					return new FieldCode("GRASS", "");
+				}});
+				return null;
+			}
+		});
 		
 		Placer placer = new Placer(fields);
 		grid.addField(placer, new Point(1, 1));
