@@ -35,7 +35,7 @@ public class PlacersKeyListner extends BasicMover<Placer>{
 			grid.getStack(field.getPosition()).removeField(field);
 			String name = JOptionPane.showInputDialog("Map name");
 			try {
-				new MapWriter(new File(name + ".xml")).write(grid);
+				new MapWriter(new File(name)).write(grid);
 			} catch (IOException e1) {
 				e1.printStackTrace();
 			}
