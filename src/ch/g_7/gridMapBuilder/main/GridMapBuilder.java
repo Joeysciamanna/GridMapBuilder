@@ -36,23 +36,34 @@ public class GridMapBuilder {
 //		FieldGrid grid = new MapReader(new File(mapPath+".xml")).read().getGrid();
 
 
-		int fieldHeight = 16;
-		int fieldWidth = 16;
-		int height = 24;
-		int width = 32;
-		FieldGrid grid = new FieldGrid(new Dimension(fieldWidth,fieldHeight), new Dimension(width, height));
+
+		int height = 25;
+		int width = 25;
+		FieldGrid grid = new FieldGrid(new Dimension(height,width), new Dimension(500, 500));
 		
-		grid.forEach(new Lambda<Void, FieldStack>() {
+		grid.forEachStack(new Lambda<Void, FieldStack>() {
 			@Override
 			public Void apply(FieldStack stack) {
-				stack.addField(new ColoredField(Color.GREEN) {
-				@Override
-				public FieldCode getCode() {
-					return new FieldCode("GRASS", "");
-				}});
+				
+				if (stack.getPosition().x == 0 || stack.getPosition().x == 24 || stack.getPosition().y == 0 || stack.getPosition().y == 24) {
+					stack.addField(new ColoredField(Color.gray) {
+						@Override
+						public FieldCode getCode() {
+							return new FieldCode("ROCK","");
+						}
+					});
+				}else {
+					stack.addField(new ColoredField(Color.yellow) {
+						@Override
+						public FieldCode getCode() {
+							return new FieldCode("GRASS","");
+						}
+					});
+				}
 				return null;
 			}
 		});
+		
 		
 		Placer placer = new Placer(fields);
 		grid.addField(placer, new Point(1, 1));

@@ -39,7 +39,7 @@ public class Placer extends Field<JComponent> implements Movable{
 		panel = fieldList.getActualWrappedField().getPanel();
 		panel.setBorder(BorderFactory.createLineBorder(Color.red));
 		stack.addField(this);
-		stack.getGrid().update();
+		stack.updatePanel();
 	}
 
 

@@ -2,13 +2,13 @@ package ch.g_7.gridMapBuilder.builder;
 
 import java.awt.event.KeyEvent;
 import java.io.File;
+import java.io.IOException;
 
 import javax.swing.JOptionPane;
 
 import ch.g_7.gridEngine.core.FieldGrid;
-import ch.g_7.gridEngine.helper.BasicMover;
-import ch.g_7.gridEngine.stream.Map;
 import ch.g_7.gridEngine.stream.MapWriter;
+import ch.g_7.gridEngine.test.BasicMover;
 
 public class PlacersKeyListner extends BasicMover<Placer>{
 
@@ -34,7 +34,11 @@ public class PlacersKeyListner extends BasicMover<Placer>{
 			FieldGrid grid = field.getFieldStack().getGrid();
 			grid.getStack(field.getPosition()).removeField(field);
 			String name = JOptionPane.showInputDialog("Map name");
-			new MapWriter(new File(name + ".xml")).write(new Map(name, grid));
+			try {
+				new MapWriter(new File(name + ".xml")).write(grid);
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
 			break;
 		case KeyEvent.VK_I:
 			
